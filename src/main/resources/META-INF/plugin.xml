@@ -15,4 +15,12 @@
         <listener class="org.jetbrains.plugins.template.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+        <group id="CableManagement.Test" text="DemoTest" description="about demo">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+            <action class="org.jetbrains.plugins.template.actions.Test" id="Template.Actions.Test" text="demo test"/>
+        </group>
+    </actions>
+
 </idea-plugin>

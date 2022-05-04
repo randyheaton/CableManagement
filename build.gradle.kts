@@ -14,6 +14,8 @@ plugins {
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
     id("org.jetbrains.qodana") version "0.1.13"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.10"
+    id("org.jetbrains.compose") version "1.1.0"
 }
 
 group = properties("pluginGroup")
@@ -22,7 +24,14 @@ version = properties("pluginVersion")
 // Configure project's dependencies
 repositories {
     mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    google()
 }
+
+dependencies {
+    implementation(compose.desktop.currentOs)
+}
+
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
