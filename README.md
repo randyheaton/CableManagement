@@ -8,7 +8,7 @@ of the naming conventions still reflect that.
 
 Cable Management is an architectural pattern compliance assistant. While I was refactoring InjectorSuite to be more
 expressive of and adherent to its MVVM model, I realized that a visual aid would be pretty cool. Something that showed
-the model layers graphically and drew lines between clients and services at each level. Sort of like really pretty cable
+the model layers graphically and drew lines between dependencies and callers at each level. Sort of like really pretty cable
 management.
 
 <font size=5> How it works:</font>
