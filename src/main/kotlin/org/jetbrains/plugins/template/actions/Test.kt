@@ -8,6 +8,7 @@ import androidx.compose.ui.awt.ComposePanel
 import androidx.compose.ui.unit.dp
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.ide.fileTemplates.FileTemplateUtil
+import com.intellij.lang.ASTNode
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -23,9 +24,15 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.json.Json
+import org.jetbrains.kotlin.idea.caches.resolve.KtFileClassProviderImpl
 import org.jetbrains.kotlin.idea.refactoring.move.moveFilesOrDirectories.KotlinMoveDirectoryWithClassesHelper
+import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtFileAnnotationList
+import org.jetbrains.kotlin.psi.KtFileClassProvider
 import java.io.FileInputStream
 import javax.swing.JComponent
+
 
 
 class Test: AnAction() {
@@ -38,6 +45,7 @@ class Test: AnAction() {
         val annotationCode=ktp.model.layers.fold(""){ acc, next->
             acc+"annotation class "+next.name+"\n\n"
         }
+
         var directory=e.getData(CommonDataKeys.PSI_FILE)!!.containingDirectory
         while (directory.name!=e.project!!.name){
             directory=directory.parentDirectory
@@ -113,3 +121,4 @@ class ActionWrapper(val text:String): DialogWrapper(true) {
         }
     }
 }
+
