@@ -42,18 +42,12 @@ I spent a lot of time in environment purgatory between Gradle and versioning pro
 squared away. And if you fork this within the next few months, it might be plug-and-go for you, but you'll probably have
 to triple check your java compiler versions. 
 
-We can render a JSON file from mock data and put it inside of the project. We can render an annotation class file and put
-it inside of the resource folder. We know that the IDE imports those annotation classes so that we'll be able to read them
-later. 
+Right now, we can take inputs from text fields to build a model. From that model, we can inject annotation classes into the project and also build a json config file of the model. And we can also build a graph of all dependencies that use annotations from the model. 
 
-And we can parse through all of the .kt files in the project in order to gather data for the graph.
 
 <font size=5>What's next:</font>
 
-We have to figure out how to syphon data from the annotations, which I know IntelliJ provides. We have to figure out 
-what IntelliJ exposes in terms of parsing classes and dependencies because it's probably better than using regex or
-string methods to run through the project files building the graph. 
 
-And then we have to figure out a good way to generate the graphic. My instinct says a Canvas because leaning on 
+We have to figure out a good way to generate the graphic. My instinct says a Canvas because leaning on 
 ready-made composables doesn't seem feasible because of the geometry. If the IDE windows will play well with a 
 webview, we could dispatch graphics to js. I don't know yet. 
