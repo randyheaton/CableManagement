@@ -1,25 +1,27 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>org.jetbrains.plugins.template</id>
-    <name>Template</name>
-    <vendor>JetBrains</vendor>
+    <id>com.injectorsuite.cablemanagement</id>
+    <name>CableManagement</name>
+    <vendor>InjectorSuite</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="org.jetbrains.plugins.template.services.MyApplicationService"/>
-        <projectService serviceImplementation="org.jetbrains.plugins.template.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.injectorsuite.cablemanagement.services.MyApplicationService"/>
+        <projectService serviceImplementation="com.injectorsuite.cablemanagement.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="org.jetbrains.plugins.template.listeners.MyProjectManagerListener"
+        <listener class="com.injectorsuite.cablemanagement.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
     <actions>
         <group id="CableManagement.Test" text="DemoTest" description="about demo">
             <add-to-group group-id="MainMenu" anchor="last"/>
-            <action class="org.jetbrains.plugins.template.actions.Test" id="Template.Actions.Test" text="demo test"/>
+            <action class="com.injectorsuite.cablemanagement.actions.EstablishModel" id="CableManagement.Actions.EstablishModel" text="Establish Model"/>
+            <action class="com.injectorsuite.cablemanagement.actions.Test" id="CableManagement.Actions.Test" text="demo test"/>
         </group>
     </actions>
 
