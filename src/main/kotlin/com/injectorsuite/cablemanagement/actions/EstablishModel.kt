@@ -96,11 +96,11 @@ class ModelReceiver(): DialogWrapper(true) {
             acc+"annotation class "+next.name+"\n\n"
         }
         var directory=e.getData(CommonDataKeys.PSI_FILE)!!.containingDirectory
-        while (directory.name!=e.project!!.name){
+        while (directory.name!="app" && directory.parentDirectory!=null){
             directory=directory.parentDirectory
         }
-        directory=directory.findSubdirectory("src")?.findSubdirectory("main")?.findSubdirectory("resources")?:directory
-        if (directory.name!="resources"){
+        directory=directory.findSubdirectory("src")?.findSubdirectory("main")?.findSubdirectory("res")?:directory
+        if (directory.name!="res"){
             Messages.showInfoMessage("For some reason, annotation file was not put in resources but was placed in "+directory.name+ ". I don't know why that happened, but you'll have to move it manually.","Error")
         }
         template.text = annotationCode
@@ -111,10 +111,10 @@ class ModelReceiver(): DialogWrapper(true) {
         val template=tm.addTemplate("json","json")
         val jsonCode= Json.encodeToString(model)
         var directory=e.getData(CommonDataKeys.PSI_FILE)!!.containingDirectory
-        while (directory.name!=e.project!!.name){
+        while (directory.name!="app" && directory.parentDirectory!=null){
             directory=directory.parentDirectory
         }
-        directory=directory.findSubdirectory("src")?.findSubdirectory("main")?.findSubdirectory("resources")?:directory
+        directory=directory.findSubdirectory("src")?.findSubdirectory("main")?.findSubdirectory("res")?:directory
         if (directory.name!="resources"){
             Messages.showInfoMessage("For some reason, annotation file was not put in resources but was placed in "+directory.name+ ". I don't know why that happened, but you'll have to move it manually.","Error")
         }

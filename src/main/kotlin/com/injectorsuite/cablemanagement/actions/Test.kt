@@ -56,7 +56,11 @@ class Test: AnAction() {
             graph.add(newNode)
         }
 
-        ActionWrapper().show()
+        val text=graph.fold("",{acc,next->
+            acc+next.toString()+"\n"
+        })
+
+        ActionWrapper(text).show()
     }
 }
 
@@ -81,14 +85,17 @@ class KTProcessor(val psiManager:PsiManager): ContentIterator {
             val annotations=it.annotationEntries.map{ann->ann.shortName.toString()}.toSet().intersect(model.layers.map{ layer->layer.name}
                 .toSet())
             if (annotations.size==1){
-                nodes.add(Node(it.name!!,annotations.first(),it.collectDescendantsOfType<KtCallExpression>().map{ ce->ce.callName()}))
-            }
+                val dependencies=it.collectDescendantsOfType<KtDotQualifiedExpression>().map{dqe->dqe.receiverExpression.text}+
+                        it.collectDescendantsOfType<KtCallExpression>().map{ ce->ce.callName()}+it.collectDescendantsOfType<KtTypeProjection>().map{tp->tp.typeReference!!.text}
+                nodes.add(Node(it.name!!,annotations.first(),dependencies))            }
             }
         file!!.getChildrenOfType<KtClass>().forEach{it->
             val annotations=it.annotationEntries.map{ann->ann.shortName.toString()}.toSet().intersect(model.layers.map{ layer->layer.name}
                 .toSet())
             if (annotations.size==1){
-                nodes.add(Node(it.name!!,annotations.first(),it.collectDescendantsOfType<KtCallExpression>().map{ ce->ce.callName()}))
+                val dependencies=it.collectDescendantsOfType<KtDotQualifiedExpression>().map{dqe->dqe.receiverExpression.text}+
+                        it.collectDescendantsOfType<KtCallExpression>().map{ ce->ce.callName()}+it.collectDescendantsOfType<KtTypeProjection>().map{tp->tp.typeReference!!.text}
+                nodes.add(Node(it.name!!,annotations.first(),dependencies))
             }
         }
         return true
@@ -114,7 +121,7 @@ class NaiveGraphBuilder(){
 }
 
 
-class ActionWrapper(): DialogWrapper(true) {
+class ActionWrapper(val text:String): DialogWrapper(true) {
     init{
         init()
         title="a demo"
@@ -124,7 +131,7 @@ class ActionWrapper(): DialogWrapper(true) {
         return ComposePanel().apply {
             setContent {
                 Column(Modifier.size(500.dp)) {
-                    Text("text")
+                    Text(text)
 
                 }
             }

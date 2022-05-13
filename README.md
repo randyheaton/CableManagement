@@ -38,21 +38,19 @@ supported but it is possible through Compose's ComposePanel().
 <font size=5> Where we're at:</font>
 
 
-I spent a lot of time in environment purgatory between Gradle and versioning problems, but now the environment is all 
-squared away. And if you fork this within the next few months, it might be plug-and-go for you, but you'll probably have
-to triple check your java compiler versions. 
+- Got the environment squared away. Lots of versioning issues with platform version (gradle properties in plugin build
+needs correct version for receiving Android Studio instance) and JVM versions. Triple check those if you fork.
 
-We can render a JSON file from mock data and put it inside of the project. We can render an annotation class file and put
-it inside of the resource folder. We know that the IDE imports those annotation classes so that we'll be able to read them
-later. 
+- Can build model from text field inputs.
 
-And we can parse through all of the .kt files in the project in order to gather data for the graph.
+- Can inject json config file and annotation class files into project.
+
+- Can generate dependency graph that is aware of simple function and constructor calls of type ``val x=Foo()``, 
+static invocations of type ``Foo.bar()``, and factory invocations of type ``val x=Builder<Foo>()``.
 
 <font size=5>What's next:</font>
 
-We have to figure out how to syphon data from the annotations, which I know IntelliJ provides. We have to figure out 
-what IntelliJ exposes in terms of parsing classes and dependencies because it's probably better than using regex or
-string methods to run through the project files building the graph. 
+Lots of hardcoding of folder names relying on assumptions about project structure need to be fixed.
 
 And then we have to figure out a good way to generate the graphic. My instinct says a Canvas because leaning on 
 ready-made composables doesn't seem feasible because of the geometry. If the IDE windows will play well with a 
