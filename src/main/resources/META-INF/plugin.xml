@@ -8,21 +8,12 @@
     <depends>org.jetbrains.kotlin</depends>
     <!--<depends>com.intellij.modules.androidstudio</depends>-->
 
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.injectorsuite.cablemanagement.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.injectorsuite.cablemanagement.services.MyProjectService"/>
-    </extensions>
-
-    <applicationListeners>
-        <listener class="com.injectorsuite.cablemanagement.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 
     <actions>
-        <group id="CableManagement.Test" text="DemoTest" description="about demo">
+        <group id="CableManagement.Action" text="Cable Management" description="CableManagement">
             <add-to-group group-id="MainMenu" anchor="last"/>
             <action class="com.injectorsuite.cablemanagement.actions.EstablishModel" id="CableManagement.Actions.EstablishModel" text="Establish Model"/>
-            <action class="com.injectorsuite.cablemanagement.actions.Test" id="CableManagement.Actions.Test" text="demo test"/>
+            <action class="com.injectorsuite.cablemanagement.actions.ShowModelAdherence" id="CableManagement.Actions.Test" text="Show Model Adherence"/>
         </group>
     </actions>
 
