@@ -4,8 +4,11 @@ a plugin description
 <!-- Plugin description end -->
 
 
+
 This is a plugin for Android Studio. I started the project from a template provided by IntelliJ, and some
 of the names still probably reflect that. 
+
+**This is a learning project. It's not intended to be used as a production product. Be cautioned that allowing a plugin to inject files into your project directories seems to really tax Android Studio's ability to index. I've been forced to invalidate caches to fix unresolved references.** 
 
 
 
@@ -66,4 +69,49 @@ static invocations ``Foo.bar()``, or factory invocations ``val x=Builder<Foo>()`
 
 Also, the geometry isn't scalable. It's all hardcoded for the demo you see in the screenshots. 
 
+
+
+# The example from the screenshots
+
+I tested the plugin on a one-screen app I made to demo use cases of LazyColumn and BottomModalSheet and learn more about using Retrofit with Compose. Here's a diagram for reference. 
+
+```
+/*
+                        ┌────────────┐
+                        │            │
+                        │   Views    │
+                        │            │
+                        └┬─────────▲─┘
+               notify    │         │ update state
+                events   │         │   for
+                 to      │         │
+                       ┌─▼─────────┴───┐◄──────────────┐
+                       │               │               │
+                       │  ViewModel    ├────────┐      │
+                       │               │        │      │
+                       └───────────────┘        │      │ render JSON
+                                       forward  │      │    for
+                                       query    │      │
+                                       through  │      │
+                                                │      │
+┌─────────────────────────────┐           ┌─────▼──────┴─────────┐
+│                             │  provide  │   NetworkInterface   │
+│                             │   key to  │   (data classes,     │
+│  KeyProviderSingleInstance  ├───────────┼─►  ApiInterface,     │
+│                             │           │    QueryGrammar)     │
+│                             │           │                      │
+│                             │           │                      │
+└────┬─────────────────────▲──┘           └────┬─────────▲───────┘
+     │                     │                   │         │
+     │request key          │          request  │         │ provide JSON
+     │   from              │           JSON    │         │    to
+   ┌─▼──────────┐          │           from   ┌▼─────────┴───┐
+   │            │          │                  │              │
+   │            │          │                  │              │
+   │  Resources ├──────────┘                  │   Server     │
+   │            │   provide key               │              │
+   │            │      to                     │              │
+   └────────────┘                             └──────────────┘
+ */
+ ```
 
