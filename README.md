@@ -9,14 +9,14 @@ of the names still probably reflect that.
 
 
 
-#Purpose:
+# Purpose:
 
 Cable Management is an architectural pattern compliance assistant. While I was refactoring InjectorSuite to be more
 expressive of and adherent to its MVVM model, I realized that a visual aid would be pretty cool. Something that showed
 the model layers graphically and drew lines between dependencies and callers at each level. Sort of like really pretty cable
 management.
 
-#How it works:
+# How it works:
 
 Inside of a few text fields, you provide us with a list of the layers of your model, specifying their names and an integer representing their
 layer level in a hierarchy. Something like: "Views" are level 1, "Interface" is level 2, and "Serializer" is level 3. 
@@ -39,12 +39,12 @@ Like tidy cable management.
 
 ![Images](/readme_images/generated_graph.png)
 
-#Why it's cool:
+# Why it's cool:
 
 The project is cool because we're using Compose for desktop inside of the IDE windows. That usage is not currently 
 supported but it is possible through Compose's ComposePanel(). 
 
-#Where we're at:
+# Where we're at:
 
 
 - Got the environment squared away. Lots of versioning issues with platform version (gradle properties in plugin build
@@ -57,7 +57,7 @@ needs correct version for receiving Android Studio instance) and JVM versions. T
 - Can generate dependency graph that is aware of simple function and constructor calls of type ``val x=Foo()``, 
 static invocations of type ``Foo.bar()``, and factory invocations of type ``val x=Builder<Foo>()``.
 
-#What's next:
+# What's next:
 
 Lots of hardcoding of folder names relying on assumptions about project structure need to be fixed.
 
